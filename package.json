@@ -12,6 +12,7 @@
   "scripts": {
     "build": "next build",
     "cleanup": "bun --bun wb lint --fix --format",
+    "deploy-build": "rm -Rf dist && bun --bun wb optimizeForDockerBuild --outside",
     "dev": "next dev",
     "format": "bun --bun wb lint --format",
     "lint": "bun --bun wb lint",
@@ -39,7 +40,7 @@
     "@typescript/native-preview": "7.0.0-dev.20260524.1",
     "@willbooster/oxfmt-config": "1.2.2",
     "@willbooster/oxlint-config": "1.4.6",
-    "@willbooster/wb": "13.20.0",
+    "@willbooster/wb": "13.22.1",
     "lefthook": "2.1.8",
     "oxfmt": "0.51.0",
     "oxlint": "1.66.0",

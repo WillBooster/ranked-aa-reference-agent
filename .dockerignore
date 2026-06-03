@@ -8,4 +8,12 @@
 **/.yarn/install-state.gz
 **/.venv
 
+dist/
+!dist/
+!dist/bash/
+!dist/bash/**
+!dist/bun.lock
+!dist/package.json
+node_modules/
+
 # Project-specific settings (tail)
