@@ -38,7 +38,7 @@
     "@types/react-dom": "19.2.3",
     "@typescript/native-preview": "7.0.0-dev.20260527.2",
     "@willbooster/oxfmt-config": "1.2.2",
-    "@willbooster/oxlint-config": "1.4.7",
+    "@willbooster/oxlint-config": "1.4.8",
     "@willbooster/wb": "13.22.7",
     "lefthook": "2.1.9",
     "oxfmt": "0.52.0",
