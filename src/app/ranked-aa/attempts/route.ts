@@ -8,6 +8,16 @@ const schema = z.object({
   taskId: z.string(),
   mode: z.string().optional(),
   requirements: z.string(),
+  prompts: z
+    .array(
+      z.object({
+        id: z.string(),
+        index: z.number(),
+        title: z.string(),
+        requirements: z.string(),
+      })
+    )
+    .optional(),
   domIds: z.record(z.string(), z.string()),
   submission: z.object({
     method: z.literal('POST'),
