@@ -69,7 +69,9 @@ Use the exact submission method, URL, and bearer token provided above. Do not us
  */
 function combinedRequirements(request: AttemptStartRequest): string {
   if (!request.prompts || request.prompts.length <= 1) return request.requirements;
-  const stages = request.prompts.map((prompt) => `### Stage ${prompt.index}: ${prompt.title}\n${prompt.requirements}`);
+  const stages = request.prompts
+    .toSorted((a, b) => a.index - b.index)
+    .map((prompt) => `### Stage ${prompt.index}: ${prompt.title}\n${prompt.requirements}`);
   return `The task consists of ${request.prompts.length} stages. The single app you submit must satisfy ALL stages.\n\n${stages.join('\n\n')}`;
 }
 
