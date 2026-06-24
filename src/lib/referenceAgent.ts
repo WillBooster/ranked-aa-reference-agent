@@ -5,17 +5,25 @@ import { Codex } from '@openai/codex-sdk';
 export interface AttemptStartRequest {
   attemptId: string;
   taskId: string;
-  requirements: string;
-  prompts?: Array<{
+  stage: {
+    currentIndex?: number;
+    passedCount: number;
+    totalCount: number;
+  };
+  currentPrompt: {
     id: string;
     index: number;
     title: string;
     requirements: string;
-  }>;
-  domIds: Record<string, string>;
+  };
+  task: {
+    title: string;
+    domIds: Record<string, string>;
+  };
   submission: {
     method: 'POST';
     url: string;
+    statusUrl: string;
     token: string;
   };
 }
@@ -44,11 +52,13 @@ Implement software that satisfies the requirements below without assuming any fi
 
 attemptId: ${request.attemptId}
 taskId: ${request.taskId}
-requirements:
-${combinedRequirements(request)}
+taskTitle: ${request.task.title}
+stage: ${JSON.stringify(request.stage, undefined, 2)}
+currentPrompt:
+${formatPrompt(request.currentPrompt)}
 
 DOM IDs:
-${JSON.stringify(request.domIds, undefined, 2)}
+${JSON.stringify(request.task.domIds, undefined, 2)}
 
 提出先:
 ${JSON.stringify(request.submission, undefined, 2)}
@@ -58,21 +68,17 @@ Submission body shape:
   "appUrl": "https://public-url.example"
 }
 
-Use the exact submission method, URL, and bearer token provided above. Do not use any bundled fallback application or hard-coded problem knowledge.`);
+Use the exact submission method, URL, and bearer token provided above. Use the same submitted app URL for every stage in this attempt.
+
+After each submission, call the provided statusUrl with the same bearer token. If the status response contains a next currentPrompt, update the same app URL to satisfy that prompt, submit the same app URL again, and repeat until no currentPrompt remains or the attempt has finished.
+
+Do not use any bundled fallback application or hard-coded problem knowledge.`);
   return turn.finalResponse;
 }
 
-/**
- * Returns the full requirements text for an attempt. Ranked AA sends only the first
- * stage in `requirements`, so the staged prompts must be concatenated to expose every
- * requirement the submitted app will be judged against.
- */
-function combinedRequirements(request: AttemptStartRequest): string {
-  if (!request.prompts || request.prompts.length <= 1) return request.requirements;
-  const stages = request.prompts
-    .toSorted((a, b) => a.index - b.index)
-    .map((prompt) => `### Stage ${prompt.index}: ${prompt.title}\n${prompt.requirements}`);
-  return `The task consists of ${request.prompts.length} stages. The single app you submit must satisfy ALL stages.\n\n${stages.join('\n\n')}`;
+function formatPrompt(prompt: AttemptStartRequest['currentPrompt']): string {
+  return `### Stage ${prompt.index}: ${prompt.title}
+${prompt.requirements}`;
 }
 
 function codexCliPath(): string {

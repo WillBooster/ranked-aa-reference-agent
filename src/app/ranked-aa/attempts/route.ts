@@ -7,21 +7,25 @@ const schema = z.object({
   attemptId: z.string(),
   taskId: z.string(),
   mode: z.string().optional(),
-  requirements: z.string(),
-  prompts: z
-    .array(
-      z.object({
-        id: z.string(),
-        index: z.number(),
-        title: z.string(),
-        requirements: z.string(),
-      })
-    )
-    .optional(),
-  domIds: z.record(z.string(), z.string()),
+  stage: z.object({
+    currentIndex: z.number().optional(),
+    passedCount: z.number(),
+    totalCount: z.number(),
+  }),
+  currentPrompt: z.object({
+    id: z.string(),
+    index: z.number(),
+    title: z.string(),
+    requirements: z.string(),
+  }),
+  task: z.object({
+    title: z.string(),
+    domIds: z.record(z.string(), z.string()),
+  }),
   submission: z.object({
     method: z.literal('POST'),
     url: z.string().url(),
+    statusUrl: z.string().url(),
     token: z.string(),
   }),
 });
