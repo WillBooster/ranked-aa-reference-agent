@@ -68,7 +68,7 @@ Submission body shape:
   "appUrl": "https://public-url.example"
 }
 
-Status response shape:
+Status response shape (currentPrompt may be omitted when no next stage remains):
 {
   "attemptId": "${request.attemptId}",
   "status": "running",
@@ -85,7 +85,7 @@ Status response shape:
 
 Use the exact submission method, URL, and bearer token provided above. Use the same submitted app URL for every stage in this attempt.
 
-After each submission, call the provided statusUrl via GET with the same bearer token in the Authorization header. If the status response contains a next currentPrompt, update the same app URL to satisfy that prompt, submit the same app URL again, and repeat until no currentPrompt remains or the attempt has finished.
+After each submission, call the provided statusUrl via GET with the same bearer token in the Authorization header as Authorization: Bearer <token>. If the status response contains a next currentPrompt, update the same app URL to satisfy that prompt, submit the same app URL again, and repeat until no currentPrompt remains or the attempt has finished.
 
 Do not use any bundled fallback application or hard-coded problem knowledge.`);
   return turn.finalResponse;
