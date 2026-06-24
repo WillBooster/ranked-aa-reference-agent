@@ -60,7 +60,7 @@ ${formatPrompt(request.currentPrompt)}
 DOM IDs:
 ${JSON.stringify(request.task.domIds, undefined, 2)}
 
-提出先:
+Submission destination:
 ${JSON.stringify(request.submission, undefined, 2)}
 
 Submission body shape:
