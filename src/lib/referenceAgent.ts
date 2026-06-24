@@ -68,6 +68,21 @@ Submission body shape:
   "appUrl": "https://public-url.example"
 }
 
+Status response shape:
+{
+  "attemptId": "${request.attemptId}",
+  "status": "running",
+  "appUrl": "https://public-url.example",
+  "currentPrompt": {
+    "id": "prompt-id",
+    "index": 2,
+    "title": "Next stage title",
+    "requirements": "Next stage requirements"
+  },
+  "passedPromptCount": 1,
+  "promptCount": ${request.stage.totalCount}
+}
+
 Use the exact submission method, URL, and bearer token provided above. Use the same submitted app URL for every stage in this attempt.
 
 After each submission, call the provided statusUrl via GET with the same bearer token in the Authorization header. If the status response contains a next currentPrompt, update the same app URL to satisfy that prompt, submit the same app URL again, and repeat until no currentPrompt remains or the attempt has finished.
