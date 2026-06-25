@@ -1,11 +1,11 @@
 {
-  "name": "ranked-aa-reference-agent",
+  "name": "ai-growbench-reference-agent",
   "version": "0.0.0",
   "private": true,
-  "description": "Reference AI agent for Ranked AA.",
+  "description": "Reference AI agent for AI Growbench.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WillBooster/ranked-aa-reference-agent.git"
+    "url": "git+https://github.com/WillBooster/ai-growbench-reference-agent.git"
   },
   "license": "MIT",
   "author": "WillBooster Inc.",

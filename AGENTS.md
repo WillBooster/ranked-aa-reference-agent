@@ -1,7 +1,7 @@
 ## Project Information
 
-- Name: `ranked-aa-reference-agent`
-- Description: Reference AI agent for Ranked AA.
+- Name: `ai-growbench-reference-agent`
+- Description: Reference AI agent for AI Growbench.
 - Package Manager: bun
 
 ## General Instructions
