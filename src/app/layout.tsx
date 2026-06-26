@@ -1,8 +1,8 @@
 import type { ReactElement, ReactNode } from 'react';
 
 export const metadata = {
-  title: 'Ranked AA Reference Agent',
-  description: 'Reference AI agent for Ranked AA',
+  title: 'AI Growbench Reference Agent',
+  description: 'Reference AI agent for AI Growbench',
 };
 
 const RootLayout = ({ children }: { children: ReactNode }): ReactElement => (

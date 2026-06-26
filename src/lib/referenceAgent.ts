@@ -46,9 +46,9 @@ async function runCodexGeneration(request: AttemptStartRequest): Promise<string>
     sandboxMode: 'workspace-write',
     workingDirectory: process.cwd(),
   });
-  const turn = await thread.run(`You are the generic Ranked AA reference agent.
+  const turn = await thread.run(`You are the generic AI Growbench reference agent.
 
-Implement software that satisfies the requirements below without assuming any fixed problem domain. Build the requested application, deploy it to a public URL, then submit that URL to Ranked AA using the submission API.
+Implement software that satisfies the requirements below without assuming any fixed problem domain. Build the requested application, deploy it to a public URL, then submit that URL to AI Growbench using the submission API.
 
 attemptId: ${request.attemptId}
 taskId: ${request.taskId}
